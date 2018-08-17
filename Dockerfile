@@ -6,7 +6,7 @@ ARG CPPCHECK_HTMLREPORT_VERSION='1.84'
 RUN apt-get update \
     && apt-get install -y \
         # Essential
-        wget tar git curl nano man htop bash-completion openssh-server socat \
+        wget tar git curl nano man htop bash-completion openssh-server socat gnupg2 \
         # GUI
         libgtk2.0-0 libcanberra-gtk-module libxext6 libxrender1 libxtst6 libxslt1.1 dmz-cursor-theme \
         # Build
