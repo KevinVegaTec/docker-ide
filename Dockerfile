@@ -1,6 +1,8 @@
 FROM ubuntu:18.04
 
 ARG TINI_VERSION='0.18.0'
+ARG NODEJS_VERSION='10'
+ARG NPM_VERSION='6.3.0'
 
 RUN apt-get update \
     && apt-get install -y \
@@ -8,6 +10,10 @@ RUN apt-get update \
         wget tar git curl nano man htop bash-completion openssh-server socat \
         # GUI
         libgtk2.0-0 libcanberra-gtk-module libxext6 libxrender1 libxtst6 libxslt1.1 dmz-cursor-theme \
+    && (curl -sL https://deb.nodesource.com/setup_${NODEJS_VERSION}.x | bash -) \
+    && apt-get install -y \
+        build-essential nodejs \
+        && npm install -g npm@${NPM_VERSION} \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ADD https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini /tini
