@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 
 ARG TINI_VERSION='0.18.0'
-ARG CPPCHECK_HTMLREPORT_VERSION='1.84'
+ARG CPPCHECK_HTMLREPORT_VERSION='1.87'
 
 RUN apt-get update \
     && apt-get install -y \
