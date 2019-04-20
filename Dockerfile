@@ -2,6 +2,7 @@ FROM ubuntu:18.04
 
 ARG TINI_VERSION='0.18.0'
 ARG PHP_VERSION='7.3'
+ARG COMPOSER_VERSION='5eb0614d3fa7130b363698d3dca52c619b463615'
 
 RUN apt-get update \
     && apt-get install -y \
@@ -31,6 +32,9 @@ RUN apt-get update \
     && pecl install xdebug \
         && echo "zend_extension=$(find /usr/lib/php -iname xdebug.so)" > /etc/php/${PHP_VERSION}/cli/conf.d/30-xdebug.ini \
         && echo "xdebug.remote_enable=1" >> /etc/php/${PHP_VERSION}/cli/conf.d/30-xdebug.ini \
+    ## Composer
+    && (wget https://raw.githubusercontent.com/composer/getcomposer.org/${COMPOSER_VERSION}/web/installer -O - -q \
+        | php -- --install-dir=/usr/bin --filename=composer) \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ADD https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini /tini
