@@ -27,6 +27,9 @@ RUN apt-get update \
             php${PHP_VERSION}-xml \
             php${PHP_VERSION}-pgsql \
             php-pear \
+    # Debugger
+    && pecl install xdebug \
+        && echo "zend_extension=$(find /usr/lib/php -iname xdebug.so)" > /etc/php/${PHP_VERSION}/cli/conf.d/30-xdebug.ini \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ADD https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini /tini
