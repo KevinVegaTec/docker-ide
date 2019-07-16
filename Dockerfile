@@ -8,6 +8,8 @@ RUN apt-get update \
         wget tar git curl nano man htop bash-completion openssh-server socat gnupg2 \
         # GUI
         libgtk2.0-0 libcanberra-gtk-module libxext6 libxrender1 libxtst6 libxslt1.1 dmz-cursor-theme \
+        # for Chromium
+        libgtk-3-0 libatk-bridge2.0-0 libx11-xcb1 libnss3 libxss1 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ADD https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini /tini
