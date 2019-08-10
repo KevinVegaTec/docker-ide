@@ -35,9 +35,11 @@ x11docker \
         --network ${NETWORK} \
         --hostname docker-ide" \
     ${IMAGE} \
-    sh -c "echo  '██████████████████████████████████' \
-        && echo ""█ Container IP http://\\\$(hostname -i) █"" \
-        && echo  '██████████████████████████████████' \
+    sh -c "echo '' \
+        && echo  '╔════════════════════════════════╗' \
+        && echo ""║ Container IP http://\\\$(hostname -i) ║"" \
+        && echo  '╚════════════════════════════════╝' \
+        && echo '' \
         && sleep 3 \
         && ${IDE_SCRIPT}"
 
