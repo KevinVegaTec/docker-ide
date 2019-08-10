@@ -38,7 +38,7 @@ x11docker \
     sh -c "echo  '██████████████████████████████████' \
         && echo ""█ Container IP http://\\\$(hostname -i) █"" \
         && echo  '██████████████████████████████████' \
-        && sleep 3 && exit 1 \
+        && sleep 3 \
         && ${IDE_SCRIPT}"
 
 docker-compose stop
