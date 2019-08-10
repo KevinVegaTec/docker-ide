@@ -28,18 +28,17 @@ set +e
 
 x11docker \
     --hostdisplay \
-    --homedir ${HOME} \
+    --home=${HOME} \
     --clipboard \
-    --stdout --stderr \
     --cap-default \
     -- "--cap-add=SYS_PTRACE \
-        -p 80:80 \
-        -p 443:443 \
-        -p 8080:8080 \
-        -p 8443:8443 \
-        -p 3000:3000 \
         --network ${NETWORK} \
         --hostname docker-ide" \
-    ${IMAGE} ${IDE_SCRIPT}
+    ${IMAGE} \
+    sh -c "echo  '██████████████████████████████████' \
+        && echo ""█ Container IP http://\\\$(hostname -i) █"" \
+        && echo  '██████████████████████████████████' \
+        && sleep 3 && exit 1 \
+        && ${IDE_SCRIPT}"
 
 docker-compose stop
