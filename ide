@@ -3,10 +3,10 @@
 set -e
 
 [ -n "$(which x11docker)" ] \
-    || { echo "x11docker is required"; exit 1; }
+    || { echo "x11docker is required https://github.com/mviereck/x11docker"; exit 1; }
 
 [ -n "$(which docker-compose)" ] \
-    || { echo "docker-compose is required"; exit 1; }
+    || { echo "docker-compose is required https://docs.docker.com/compose/install/"; exit 1; }
 
 TAG=${1}
 [ -n "${TAG}" ] \
@@ -28,18 +28,19 @@ set +e
 
 x11docker \
     --hostdisplay \
-    --homedir ${HOME} \
+    --home=${HOME} \
     --clipboard \
-    --stdout --stderr \
     --cap-default \
     -- "--cap-add=SYS_PTRACE \
-        -p 80:80 \
-        -p 443:443 \
-        -p 8080:8080 \
-        -p 8443:8443 \
-        -p 3000:3000 \
         --network ${NETWORK} \
         --hostname docker-ide" \
-    ${IMAGE} ${IDE_SCRIPT}
+    ${IMAGE} \
+    sh -c "echo '' \
+        && echo  '╔════════════════════════════════╗' \
+        && echo ""║ Container IP http://\\\$(hostname -i) ║"" \
+        && echo  '╚════════════════════════════════╝' \
+        && echo '' \
+        && sleep 3 \
+        && ${IDE_SCRIPT}"
 
 docker-compose stop

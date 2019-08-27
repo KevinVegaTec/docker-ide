@@ -10,8 +10,6 @@
 2. [Choose a tag](https://hub.docker.com/r/01e9/ide/tags) for your programming language
 3. Start IDE in Docker
 
-    The command has two parameters
-
     `./ide {TAG} {IDE-script}`
 
     Example
@@ -19,6 +17,8 @@
     `./ide js ~/some-dir/webstorm/bin/webstorm.sh`
 
     **Important**: IDE must be in home directory
-4. Copy `docker-compose.override.yml.example`
-   to `docker-compose.override.yml`
+4. Copy `docker-compose.override.yml.example` to `docker-compose.override.yml`
+
    and add whatever services you need for your project.
+
+   **Note**: Service/Database host is container name `docker_ide_{SERVICE}`
