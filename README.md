@@ -22,3 +22,13 @@
    and add whatever services you need for your project.
 
    **Note**: Service/Database host is container name `docker_ide_{SERVICE}`
+
+## Start IDE with short command
+
+Add in `~/.bash_aliases`:
+
+```sh
+alias webstorm="~/docker-ide/ide php ~/soft/webstorm/bin/webstorm.sh"
+```
+
+Next time start the IDE with alias command `webstorm`.
