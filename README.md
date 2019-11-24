@@ -28,7 +28,7 @@
 Add in `~/.bash_aliases`:
 
 ```sh
-alias webstorm="~/docker-ide/ide php ~/soft/webstorm/bin/webstorm.sh"
+alias webstorm="~/some-dir/docker-ide/ide js ~/another-dir/webstorm/bin/webstorm.sh"
 ```
 
 Next time start the IDE with alias command `webstorm`.
