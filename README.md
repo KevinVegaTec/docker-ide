@@ -36,5 +36,5 @@ Next time start the IDE with alias command `webstorm`.
 ## Pass options to `x11docker`
 
 ```sh
-./ide js ~/some-dir/clion/bin/clion.sh -x11docker "--gpu --alsa"
+./ide cpp-gpu ~/some-dir/clion/bin/clion.sh -x11docker "--gpu --alsa"
 ```
