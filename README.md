@@ -32,3 +32,9 @@ alias webstorm="~/some-dir/docker-ide/ide js ~/another-dir/webstorm/bin/webstorm
 ```
 
 Next time start the IDE with alias command `webstorm`.
+
+## Pass options to `x11docker`
+
+```sh
+./ide js ~/some-dir/clion/bin/clion.sh -x11docker "--gpu --alsa"
+```
