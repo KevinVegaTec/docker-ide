@@ -17,6 +17,8 @@ RUN apt-get update \
         gdb gdbserver \
         # Code analisys
         gcovr cppcheck python-pygments valgrind \
+        # GPU/OpenGL
+        libglfw3-dev libassimp-dev libxinerama-dev libxcursor-dev libxi-dev mesa-utils mesa-utils-extra kmod \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ADD https://raw.githubusercontent.com/danmar/cppcheck/${CPPCHECK_HTMLREPORT_VERSION}/htmlreport/cppcheck-htmlreport /usr/local/bin/cppcheck-htmlreport
