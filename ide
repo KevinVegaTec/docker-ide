@@ -36,7 +36,7 @@ while test $# -gt 0; do
     -x11docker)
       shift
       if test $# -gt 0; then
-        export X11DOCKER_OPTS=$1
+        export X11DOCKER_OPTS="$1"
       else
         echo "no args specified"
         exit 1
