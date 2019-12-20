@@ -2,7 +2,7 @@ FROM ubuntu:18.04
 
 ARG TINI_VERSION='0.18.0'
 ARG NODEJS_VERSION='10'
-ARG NPM_VERSION='6.11.2'
+ARG NPM_VERSION='6.13.4'
 
 RUN apt-get update \
     && apt-get install -y \
