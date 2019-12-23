@@ -22,3 +22,19 @@
    and add whatever services you need for your project.
 
    **Note**: Service/Database host is container name `docker_ide_{SERVICE}`
+
+## Start IDE with short command
+
+Add in `~/.bash_aliases`:
+
+```sh
+alias webstorm="~/some-dir/docker-ide/ide js ~/another-dir/webstorm/bin/webstorm.sh"
+```
+
+Next time start the IDE with alias command `webstorm`.
+
+## Pass options to `x11docker`
+
+```sh
+./ide cpp-gpu ~/some-dir/clion/bin/clion.sh -x11docker "--gpu --alsa"
+```
