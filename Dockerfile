@@ -3,6 +3,8 @@ FROM ubuntu:18.04
 ARG TINI_VERSION='0.18.0'
 ARG PHP_VERSION='7.4'
 ARG COMPOSER_VERSION='1.9.1'
+ARG NODEJS_VERSION='10'
+ARG NPM_VERSION='6.13.4'
 
 RUN apt-get update \
     && apt-get install -y \
@@ -34,9 +36,13 @@ RUN apt-get update \
     && pecl install xdebug \
         && echo "zend_extension=$(find /usr/lib/php -iname xdebug.so)" > /etc/php/${PHP_VERSION}/cli/conf.d/30-xdebug.ini \
         && echo "xdebug.remote_enable=1" >> /etc/php/${PHP_VERSION}/cli/conf.d/30-xdebug.ini \
-    ## Composer
+    # Composer
     && wget https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar -O /usr/bin/composer -q \
         && chmod +x /usr/bin/composer \
+    # JS
+    && (curl -sL https://deb.nodesource.com/setup_${NODEJS_VERSION}.x | bash -) \
+        && apt-get install -y build-essential nodejs \
+        && npm install -g npm@${NPM_VERSION} \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ADD https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini /tini
