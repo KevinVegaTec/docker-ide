@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 
 ARG TINI_VERSION='0.18.0'
-ARG PHP_VERSION='7.4'
+ARG PHP_VERSION='7.2'
 ARG COMPOSER_VERSION='1.9.1'
 ARG NODEJS_VERSION='10'
 ARG NPM_VERSION='6.13.6'
@@ -19,20 +19,18 @@ RUN apt-get update \
         && ln -fs /usr/share/zoneinfo/Europe/Chisinau /etc/localtime \
         && dpkg-reconfigure --frontend noninteractive tzdata \
     # PHP
-    && apt-get install -y software-properties-common \
-        && add-apt-repository -y ppa:ondrej/php \
-        && apt-get install -y \
-            php${PHP_VERSION} \
-            php${PHP_VERSION}-curl \
-            php${PHP_VERSION}-dev \
-            php${PHP_VERSION}-gd \
-            php${PHP_VERSION}-mbstring \
-            php${PHP_VERSION}-zip \
-            php${PHP_VERSION}-mysql \
-            php${PHP_VERSION}-xml \
-            php${PHP_VERSION}-pgsql \
-            php${PHP_VERSION}-amqp \
-            php-pear \
+    && apt-get install -y \
+        php${PHP_VERSION} \
+        php${PHP_VERSION}-curl \
+        php${PHP_VERSION}-dev \
+        php${PHP_VERSION}-gd \
+        php${PHP_VERSION}-mbstring \
+        php${PHP_VERSION}-zip \
+        php${PHP_VERSION}-mysql \
+        php${PHP_VERSION}-xml \
+        php${PHP_VERSION}-pgsql \
+        php${PHP_VERSION}-amqp \
+        php-pear \
     # Debugger
     && pecl install xdebug \
         && echo "zend_extension=$(find /usr/lib/php -iname xdebug.so)" > /etc/php/${PHP_VERSION}/cli/conf.d/30-xdebug.ini \
