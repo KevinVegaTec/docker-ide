@@ -30,6 +30,7 @@ RUN apt-get update \
         php${PHP_VERSION}-xml \
         php${PHP_VERSION}-pgsql \
         php${PHP_VERSION}-amqp \
+        php${PHP_VERSION}-intl \
         php-pear \
     # Debugger
     && pecl install xdebug \
