@@ -37,7 +37,8 @@ RUN apt-get update \
     # Debugger
     && pecl install xdebug \
         && echo "zend_extension=$(find /usr/lib/php -iname xdebug.so)" > /etc/php/${PHP_VERSION}/cli/conf.d/30-xdebug.ini \
-        && echo "xdebug.remote_enable=1" >> /etc/php/${PHP_VERSION}/cli/conf.d/30-xdebug.ini \
+        && echo 'xdebug.remote_enable=1' >> /etc/php/${PHP_VERSION}/cli/conf.d/30-xdebug.ini \
+        && echo 'xdebug.idekey="docker-ide"' >> /etc/php/${PHP_VERSION}/cli/conf.d/30-xdebug.ini \
     # Composer
     && wget https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar -O /usr/bin/composer -q \
         && chmod +x /usr/bin/composer \
