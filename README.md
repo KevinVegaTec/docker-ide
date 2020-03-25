@@ -4,6 +4,8 @@
 * Script to start IDE in container
 * Docker-Compose environment with common services like database, queue, etc.
 
+![diagram](diagram.png)
+
 ## Getting started
 
 1. Clone/Download this repo
