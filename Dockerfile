@@ -4,7 +4,7 @@ ARG TINI_VERSION='0.18.0'
 ARG PHP_VERSION='7.2'
 ARG COMPOSER_VERSION='1.9.1'
 ARG NODEJS_VERSION='10'
-ARG NPM_VERSION='6.13.6'
+ARG NPM_VERSION='6.14.4'
 
 RUN apt-get update \
     && apt-get install -y \
@@ -35,7 +35,8 @@ RUN apt-get update \
     # Debugger
     && pecl install xdebug \
         && echo "zend_extension=$(find /usr/lib/php -iname xdebug.so)" > /etc/php/${PHP_VERSION}/cli/conf.d/30-xdebug.ini \
-        && echo "xdebug.remote_enable=1" >> /etc/php/${PHP_VERSION}/cli/conf.d/30-xdebug.ini \
+        && echo 'xdebug.remote_enable=1' >> /etc/php/${PHP_VERSION}/cli/conf.d/30-xdebug.ini \
+        && echo 'xdebug.idekey="docker-ide"' >> /etc/php/${PHP_VERSION}/cli/conf.d/30-xdebug.ini \
     # Composer
     && wget https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar -O /usr/bin/composer -q \
         && chmod +x /usr/bin/composer \
