@@ -19,7 +19,7 @@
     `./ide js ~/some-dir/webstorm/bin/webstorm.sh`
 
     **Important**: IDE must be in home directory
-4. Copy `docker-compose.override.yml.example` to `docker-compose.override.yml`
+4. Optional: Copy `docker-compose.override.yml.example` to `docker-compose.override.yml`
 
    and add whatever services you need for your project.
 
