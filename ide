@@ -2,9 +2,6 @@
 
 set -e
 
-[ -n "$(which x11docker)" ] \
-    || { echo "x11docker is required https://github.com/mviereck/x11docker"; exit 1; }
-
 [ -n "$(which docker-compose)" ] \
     || { echo "docker-compose is required https://docs.docker.com/compose/install/"; exit 1; }
 
@@ -55,7 +52,7 @@ docker-compose up -d
 
 set +e
 
-x11docker \
+./x11docker \
     --hostdisplay \
     --home=${HOME} \
     --clipboard \
