@@ -67,7 +67,6 @@ set +e
         && echo ""║ Container IP http://\\\$(hostname -i) ║"" \
         && echo  '╚════════════════════════════════╝' \
         && echo '' \
-        && sleep 3 \
         && ${IDE_SCRIPT}"
 
 which docker-compose>/dev/null && docker-compose stop
