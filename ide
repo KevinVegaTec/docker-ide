@@ -2,11 +2,8 @@
 
 set -e
 
-[ -n "$(which x11docker)" ] \
-    || { echo "x11docker is required https://github.com/mviereck/x11docker"; exit 1; }
-
 [ -n "$(which docker-compose)" ] \
-    || { echo "docker-compose is required https://docs.docker.com/compose/install/"; exit 1; }
+    || { echo "docker-compose is recommended https://docs.docker.com/compose/install/"; }
 
 TAG=${1}
 [ -n "${TAG}" ] \
@@ -36,7 +33,7 @@ while test $# -gt 0; do
     -x11docker)
       shift
       if test $# -gt 0; then
-        export X11DOCKER_OPTS=$1
+        export X11DOCKER_OPTS="$1"
       else
         echo "no args specified"
         exit 1
@@ -51,11 +48,11 @@ done
 
 cd ${SCRIPT_DIR}
 
-docker-compose up -d
+which docker-compose>/dev/null && docker-compose up -d
 
 set +e
 
-x11docker \
+./x11docker \
     --hostdisplay \
     --home=${HOME} \
     --clipboard \
@@ -70,7 +67,6 @@ x11docker \
         && echo ""║ Container IP http://\\\$(hostname -i) ║"" \
         && echo  '╚════════════════════════════════╝' \
         && echo '' \
-        && sleep 3 \
         && ${IDE_SCRIPT}"
 
-docker-compose stop
+which docker-compose>/dev/null && docker-compose stop
