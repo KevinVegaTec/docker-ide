@@ -4,6 +4,8 @@
 * Script to start IDE in container
 * Docker-Compose environment with common services like database, queue, etc.
 
+![diagram](diagram.png)
+
 ## Getting started
 
 1. Clone/Download this repo
@@ -17,7 +19,7 @@
     `./ide js ~/some-dir/webstorm/bin/webstorm.sh`
 
     **Important**: IDE must be in home directory
-4. Copy `docker-compose.override.yml.example` to `docker-compose.override.yml`
+4. Optional: Copy `docker-compose.override.yml.example` to `docker-compose.override.yml`
 
    and add whatever services you need for your project.
 
@@ -36,5 +38,5 @@ Next time start the IDE with alias command `webstorm`.
 ## Pass options to `x11docker`
 
 ```sh
-./ide js ~/some-dir/clion/bin/clion.sh -x11docker "--gpu --alsa"
+./ide cpp-gpu ~/some-dir/clion/bin/clion.sh -x11docker "--gpu --alsa"
 ```

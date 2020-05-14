@@ -1,17 +1,8 @@
 version: '3.5'
 
-volumes:
-    postgres:
-    mysql:
-
 services:
-    postgres:
-        container_name: docker_ide_postgres
-        image: postgres:9
-        volumes:
-            - postgres:/var/lib/postgresql/data
-        environment:
-            POSTGRES_USER: "justdoit"
-            POSTGRES_PASSWORD: "justdoit"
-            POSTGRES_DB: "justdoit"
+    demo:
+        container_name: docker_ide_demo
+        image: krallin/ubuntu-tini
+        command: ["tini", "--", "sleep", "infinity"]
 
