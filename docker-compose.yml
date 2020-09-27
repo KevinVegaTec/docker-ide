@@ -1,8 +1,8 @@
 version: '3.5'
 
 services:
-    demo:
-        container_name: docker_ide_demo
-        image: krallin/ubuntu-tini
-        command: ["tini", "--", "sleep", "infinity"]
+  demo:
+    container_name: ide_demo
+    image: krallin/ubuntu-tini
+    command: ["tini", "--", "sleep", "infinity"]
 
