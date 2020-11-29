@@ -14,7 +14,7 @@ IDE_SCRIPT=${2}
     || { echo "IDE script is required (~/path/to/ide.sh)"; exit 1; }
 
 IMAGE="01e9/ide:${TAG}"
-NETWORK='docker_ide_default'
+NETWORK='ide_default'
 SCRIPT_DIR=$(dirname $(readlink -f "$0"))
 
 shift # TAG
@@ -33,7 +33,7 @@ while test $# -gt 0; do
     -x11docker)
       shift
       if test $# -gt 0; then
-        export X11DOCKER_OPTS="$1"
+        export X11DOCKER_OPTS="${X11DOCKER_OPTS} $1"
       else
         echo "no args specified"
         exit 1
@@ -60,7 +60,7 @@ set +e
     ${X11DOCKER_OPTS} \
     -- "--cap-add=SYS_PTRACE \
         --network ${NETWORK} \
-        --hostname docker-ide" \
+        --hostname docker-ide ${DOCKER_RUN_OPTS}" \
     ${IMAGE} \
     sh -c "echo '' \
         && echo  '╔════════════════════════════════╗' \

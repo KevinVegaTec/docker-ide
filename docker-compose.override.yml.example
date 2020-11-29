@@ -1,16 +1,17 @@
 version: '3.5'
 
 volumes:
-    mysql:
+  mysql:
 
 services:
-    mysql:
-        container_name: docker_ide_mysql
-        image: mysql:8
-        volumes:
-            - mysql:/var/lib/mysql
-        environment:
-            MYSQL_ROOT_PASSWORD: "justdoit"
-            MYSQL_DATABASE: "justdoit"
-            MYSQL_USER: "justdoit"
-            MYSQL_PASSWORD: "justdoit"
+  mysql:
+    container_name: ide_mysql
+    image: mysql:8
+    volumes:
+      - mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "justdoit"
+      MYSQL_DATABASE: "justdoit"
+      MYSQL_USER: "justdoit"
+      MYSQL_PASSWORD: "justdoit"
+
