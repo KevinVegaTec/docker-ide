@@ -23,7 +23,7 @@
 
    and add whatever services you need for your project.
 
-   **Note**: Service/Database host is container name `docker_ide_{SERVICE}`
+   **Note**: Service/Database host is container name `ide_{SERVICE}`
 
 ## Start IDE with short command
 
