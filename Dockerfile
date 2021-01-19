@@ -1,6 +1,9 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 ARG TINI_VERSION='0.18.0'
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV DEBCONF_NONINTERACTIVE_SEEN true
 
 RUN apt-get update \
     && apt-get install -y \
