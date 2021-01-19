@@ -1,10 +1,13 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 ARG TINI_VERSION='0.18.0'
 ARG PHP_VERSION='7.4'
 ARG COMPOSER_VERSION='2.0.6'
 ARG NODEJS_VERSION='10'
 ARG NPM_VERSION='6.14.4'
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV DEBCONF_NONINTERACTIVE_SEEN true
 
 RUN apt-get update \
     && apt-get install -y \
@@ -17,12 +20,14 @@ RUN apt-get update \
         # for Chromium
         libgtk-3-0 libatk-bridge2.0-0 libx11-xcb1 libnss3 libxss1 \
     # tzdata
-    && DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata \
-        && ln -fs /usr/share/zoneinfo/Europe/Chisinau /etc/localtime \
-        && dpkg-reconfigure --frontend noninteractive tzdata \
+    && truncate -s0 /tmp/preseed.cfg \
+        && echo "tzdata tzdata/Areas select Europe" >> /tmp/preseed.cfg \
+        && echo "tzdata tzdata/Zones/Europe select Chisinau" >> /tmp/preseed.cfg \
+        && debconf-set-selections /tmp/preseed.cfg \
+        && rm -f /etc/timezone /etc/localtime \
+        && apt-get install -y tzdata \
     # PHP
     && apt-get install -y software-properties-common \
-        && add-apt-repository -y ppa:ondrej/php \
         && apt-get install -y \
             php${PHP_VERSION} \
             php${PHP_VERSION}-curl \
