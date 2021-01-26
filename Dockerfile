@@ -2,9 +2,9 @@ FROM ubuntu:20.04
 
 ARG TINI_VERSION='0.18.0'
 ARG PHP_VERSION='7.4'
-ARG COMPOSER_VERSION='2.0.6'
+ARG COMPOSER_VERSION='2.0.8'
 ARG NODEJS_VERSION='10'
-ARG NPM_VERSION='6.14.4'
+ARG NPM_VERSION='6.14.11'
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN true
@@ -46,6 +46,9 @@ RUN apt-get update \
             php${PHP_VERSION}-intl \
             php${PHP_VERSION}-redis \
             php-pear \
+    && apt-get install -y libmagickwand-dev \
+        && pecl install imagick \
+        && echo "extension=$(find /usr/lib/php -iname imagick.so)" > /etc/php/${PHP_VERSION}/cli/conf.d/20-imagick.ini \
     # Debugger
     && pecl install xdebug \
         && echo "zend_extension=$(find /usr/lib/php -iname xdebug.so)" > /etc/php/${PHP_VERSION}/cli/conf.d/30-xdebug.ini \
