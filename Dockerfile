@@ -3,8 +3,12 @@ FROM ubuntu:20.04
 ARG TINI_VERSION='0.18.0'
 ARG PHP_VERSION='7.4'
 ARG COMPOSER_VERSION='2.0.8'
-ARG NODEJS_VERSION='10'
-ARG NPM_VERSION='6.14.11'
+ARG NODEJS_VERSION='14'
+ARG NPM_VERSION='7.5.4'
+ARG GRPC_VERSION='1.35.0'
+ARG PROTOBUF_VERSION='3.14.0'
+
+ARG COMPILATION_CPUS=1
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN true
@@ -43,6 +47,7 @@ RUN apt-get update \
             php${PHP_VERSION}-intl \
             php${PHP_VERSION}-redis \
             php-pear \
+    # Imagick
     && apt-get install -y libmagickwand-dev \
         && pecl install imagick \
         && echo "extension=$(find /usr/lib/php -iname imagick.so)" > /etc/php/${PHP_VERSION}/cli/conf.d/20-imagick.ini \
@@ -53,6 +58,35 @@ RUN apt-get update \
         && echo 'xdebug.client_port=9000' >> /etc/php/${PHP_VERSION}/cli/conf.d/30-xdebug.ini \
         && echo 'xdebug.remote_enable=1' >> /etc/php/${PHP_VERSION}/cli/conf.d/30-xdebug.ini \
         && echo 'xdebug.idekey="docker-ide"' >> /etc/php/${PHP_VERSION}/cli/conf.d/30-xdebug.ini \
+    # gRPC
+    && pecl install grpc-${GRPC_VERSION} \
+        && echo "extension=$(find /usr/lib/php -iname grpc.so)" > /etc/php/${PHP_VERSION}/cli/conf.d/20-grpc.ini \
+    # Protobuf
+    && pecl install protobuf-${PROTOBUF_VERSION} \
+        && echo "extension=$(find /usr/lib/php -iname protobuf.so)" > /etc/php/${PHP_VERSION}/cli/conf.d/21-protobuf.ini \
+    && cd /tmp \
+        && wget https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOBUF_VERSION}/protobuf-all-${PROTOBUF_VERSION}.tar.gz \
+            -O protobuf.tar.gz -q \
+        && tar -xf protobuf.tar.gz \
+        && rm protobuf.tar.gz \
+        && mv protobuf-* protobuf \
+        && cd protobuf \
+        && ./autogen.sh \
+        && ./configure \
+        && make -j ${COMPILATION_CPUS} \
+        && make check -j ${COMPILATION_CPUS} \
+        && make install \
+        && ldconfig \
+    # gRPC PHP plugin
+    && apt install -y cmake \
+        && cd /tmp \
+        && git clone --recursive --depth 1 --shallow-submodules -b v${GRPC_VERSION} https://github.com/grpc/grpc \
+        && mkdir -p grpc/build \
+        && cd grpc/build \
+        && cmake .. \
+        && cmake --build . --target grpc_php_plugin -- -j ${COMPILATION_CPUS} \
+        && cp grpc_php_plugin "$(dirname $(which protoc))/" \
+        && apt remove -y cmake \
     # Composer
     && wget https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar -O /usr/bin/composer -q \
         && chmod +x /usr/bin/composer \
@@ -60,7 +94,7 @@ RUN apt-get update \
     && (curl -sL https://deb.nodesource.com/setup_${NODEJS_VERSION}.x | bash -) \
         && apt-get install -y build-essential nodejs \
         && npm install -g npm@${NPM_VERSION} \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
 
 ADD https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini /tini
 RUN chmod +x /tini
