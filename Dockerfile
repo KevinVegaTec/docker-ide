@@ -74,7 +74,6 @@ RUN apt-get update \
         && ./autogen.sh \
         && ./configure \
         && make -j ${COMPILATION_CPUS} \
-        && make check -j ${COMPILATION_CPUS} \
         && make install \
         && ldconfig \
     # gRPC PHP plugin
