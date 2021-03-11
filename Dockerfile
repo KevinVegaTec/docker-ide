@@ -47,6 +47,7 @@ RUN apt-get update \
             php${PHP_VERSION}-intl \
             php${PHP_VERSION}-redis \
             php-pear \
+        && sed -i 's/^;\?\(date\.timezone\) =.*/\1 = "Europe\/Chisinau"/' /etc/php/${PHP_VERSION}/cli/php.ini \
     # Imagick
     && apt-get install -y libmagickwand-dev \
         && pecl install imagick \
