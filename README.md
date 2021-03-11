@@ -35,6 +35,14 @@ alias webstorm="~/some-dir/docker-ide/ide js ~/another-dir/webstorm/bin/webstorm
 
 Next time start the IDE with alias command `webstorm`.
 
+## Port binding
+
+Instead of accessing your dev server via container IP, you can bind ports:
+
+```sh
+alias webstorm="env DOCKER_RUN_OPTS='-p 8080:8080 -p 9000:9000' ~/some-dir/docker-ide/ide js ~/another-dir/webstorm/bin/webstorm.sh"
+```
+
 ## Pass options to `x11docker`
 
 ```sh
