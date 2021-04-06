@@ -129,7 +129,7 @@ Next time start the IDE with alias command `webstorm`.
 
     services:
       elastic:
-        image: docker.elastic.co/elasticsearch/elasticsearch:7.9
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.12.0
         container_name: ide_elastic
         environment:
           - node.name=ide_elastic
