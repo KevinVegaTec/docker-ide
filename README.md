@@ -151,9 +151,9 @@ Next time start the IDE with alias command `webstorm`.
 
     ```yaml
     elastic_kibana:
-       image: docker.elastic.co/kibana/kibana:7.12.0
-       container_name: ide_elastic_kibana
-       environment:
-          ELASTICSEARCH_URL: http://ide_elastic:9200
-          ELASTICSEARCH_HOSTS: http://ide_elastic:9200
+      image: docker.elastic.co/kibana/kibana:7.12.0
+      container_name: ide_elastic_kibana
+      environment:
+        ELASTICSEARCH_URL: http://ide_elastic:9200
+        ELASTICSEARCH_HOSTS: http://ide_elastic:9200
     ```
