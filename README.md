@@ -156,4 +156,6 @@ Next time start the IDE with alias command `webstorm`.
       environment:
         ELASTICSEARCH_URL: http://ide_elastic:9200
         ELASTICSEARCH_HOSTS: http://ide_elastic:9200
+      ports:
+        - 5601:5601
     ```
