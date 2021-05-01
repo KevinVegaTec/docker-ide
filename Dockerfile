@@ -16,7 +16,7 @@ ENV DEBCONF_NONINTERACTIVE_SEEN true
 RUN apt-get update \
     && apt-get install -y \
         # Essential
-        wget tar unzip git curl nano man htop bash-completion openssh-server socat gnupg2 \
+        wget tar unzip git curl nano man htop bash-completion openssh-server socat gnupg2 python2 \
         # GUI
         libgtk2.0-0 libcanberra-gtk-module libxext6 libxrender1 libxtst6 libxslt1.1 dmz-cursor-theme \
         # for VsCode
