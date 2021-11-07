@@ -23,6 +23,8 @@ RUN apt-get update \
         libxcb-dri3-0 libdrm-dev libgbm-dev \
         # for Chromium
         libgtk-3-0 libatk-bridge2.0-0 libx11-xcb1 libnss3 libxss1 \
+        # for JetBrains
+        libxshmfence-dev \
     # tzdata
     && truncate -s0 /tmp/preseed.cfg \
         && echo "tzdata tzdata/Areas select Europe" >> /tmp/preseed.cfg \
