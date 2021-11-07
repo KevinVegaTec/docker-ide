@@ -15,6 +15,8 @@ RUN apt-get update \
         libxcb-dri3-0 libdrm-dev libgbm-dev \
         # for Chromium
         libgtk-3-0 libatk-bridge2.0-0 libx11-xcb1 libnss3 libxss1 \
+        # for JetBrains
+        libxshmfence-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
 
 ADD https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini /tini
