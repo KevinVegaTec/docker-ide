@@ -96,6 +96,11 @@ RUN apt-get update \
     && (curl -sL https://deb.nodesource.com/setup_${NODEJS_VERSION}.x | bash -) \
         && apt-get install -y build-essential nodejs \
         && npm install -g npm@${NPM_VERSION} \
+    # Dart
+    && sh -c 'wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -' \
+        && sh -c 'wget -qO- https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list' \
+        && apt update \
+        && apt install -y dart \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
 
 ADD https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini /tini
